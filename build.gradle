@@ -1,0 +1,60 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.iqmsoft.boot.react'
+version = '0.0.1-SNAPSHOT'
+
+description = 'Spring Boot React Material'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+buildscript {
+    ext {
+        springBootVersion = '1.5.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+task cfpush {
+    doLast {
+        exec {
+            commandLine "gradle", "clean", "build"
+        }
+
+        exec {
+            // cf login --sso
+            commandLine "cf", "push", "thoughts", "-p", "build/libs/thoughts-0.0.1-SNAPSHOT.jar", "-b", "java_buildpack_offline"
+        }
+    }
+}
+
+bootRun {
+    addResources = true
+}
+
+jar {
+    baseName = 'SpringBootReactMaterial'
+    version = '0.0.1-SNAPSHOT'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile "org.springframework.boot:spring-boot-starter-data-rest"
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+	compile "org.springframework.boot:spring-boot-actuator"
+    compile "org.flywaydb:flyway-core:4.1.2"
+    runtime "com.h2database:h2"
+    compile "org.projectlombok:lombok"
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+}

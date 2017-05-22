@@ -1,0 +1,15 @@
+machine:
+  node:
+    version: stable
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+
+dependencies:
+  override:
+    - yarn
+  cache_directories:
+    - ~/.cache/yarn
+
+test:
+  override:
+    - "JEST_JUNIT_OUTPUT=$CIRCLE_TEST_REPORTS/jest/junit.xml yarn test"

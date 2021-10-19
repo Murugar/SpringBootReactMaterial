@@ -1,6 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'eclipse'
 
 group = 'com.iqmsoft.boot.react'
 version = '0.0.1-SNAPSHOT'
@@ -12,7 +14,7 @@ targetCompatibility = 1.8
 
 buildscript {
     ext {
-        springBootVersion = '1.5.3.RELEASE'
+        springBootVersion = '2.1.4.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -22,22 +24,6 @@ buildscript {
     }
 }
 
-task cfpush {
-    doLast {
-        exec {
-            commandLine "gradle", "clean", "build"
-        }
-
-        exec {
-            // cf login --sso
-            commandLine "cf", "push", "thoughts", "-p", "build/libs/thoughts-0.0.1-SNAPSHOT.jar", "-b", "java_buildpack_offline"
-        }
-    }
-}
-
-bootRun {
-    addResources = true
-}
 
 jar {
     baseName = 'SpringBootReactMaterial'
@@ -53,7 +39,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-data-rest"
     compile "org.springframework.boot:spring-boot-starter-thymeleaf"
 	compile "org.springframework.boot:spring-boot-actuator"
-    compile "org.flywaydb:flyway-core:4.1.2"
+    compile "org.flywaydb:flyway-core:5.2.3"
     runtime "com.h2database:h2"
     compile "org.projectlombok:lombok"
     testCompile "org.springframework.boot:spring-boot-starter-test"

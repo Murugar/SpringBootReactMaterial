@@ -29,7 +29,7 @@
     "file-loader": "^0.11.1",
     "jquery": "^3.1.1",
     "material-ui": "0.18.1",
-    "moment": "2.18.1",
+    "moment": "^2.29.1",
     "react": "15.5.4",
     "react-addons-css-transition-group": "15.5.2",
     "react-bootstrap": "^0.31.0",
@@ -47,8 +47,10 @@
     "xstream": "^10.8.0"
   },
   "scripts": {
-    "test": "jest",
-    "watch": "webpack --watch -d"
+      "test": "jest",
+    "watch": "webpack --watch -d",
+    "build": "webpack --config webpack.config.js" 
+      
   },
   "devDependencies": {
     "@cycle/time": "^0.8.0",
@@ -74,7 +76,8 @@
     "redux-mock-store": "^1.2.3",
     "sass-loader": "^6.0.5",
     "style-loader": "^0.18.0",
-    "url-loader": "^0.5.8"
+    "url-loader": "^0.5.8",
+    "webpack-cli": "^4.9.1"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "./src/main/js/test-helpers/localStorageMock.js",
